@@ -22,8 +22,8 @@ namespace _20160815.ScreenCuter
         public MainViewModel MainViewModel;
         public MainWindow()
         {
-            MainViewModel = new MainViewModel(this);
             InitializeComponent();
+            MainViewModel = new MainViewModel(this);
             DataContext = MainViewModel;
             
         }

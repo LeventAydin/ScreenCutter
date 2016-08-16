@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_20160815.ScreenCuter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        Title="Screen Cutter" Height="113.253" Width="206.024">
     <Grid>
-        <Button x:Name="button" Content="Kırp" Command="ButtonCommands" CommandParameter="Cut" HorizontalAlignment="Left" Margin="18,163,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
-        <Button x:Name="button1" Content="Göster" Command="ButtonCommands" CommandParameter="Show" HorizontalAlignment="Left" Margin="114,163,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
-        <Button x:Name="button2" Content="Çıkış" Command="ButtonCommands" CommandParameter="Exit" HorizontalAlignment="Left" Margin="207,163,0,0" VerticalAlignment="Top" Width="75" Height="50"/>
+        <Button x:Name="button" Content="Kırp" Command="{Binding ButtonsClick}" CommandParameter="Cut" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Width="71" Height="59"/>
+        <Button x:Name="button1" Content="Göster" Command="{Binding ButtonsClick}" CommandParameter="Show" HorizontalAlignment="Left" Margin="112,10,0,0" VerticalAlignment="Top" Width="75" Height="59"/>
 
     </Grid>
 </Window>

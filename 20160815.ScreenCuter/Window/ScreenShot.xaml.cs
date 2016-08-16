@@ -22,8 +22,8 @@ namespace _20160815.ScreenCuter
         public ScreenShotViewModel ScreenShotViewModel;
         public ScreenShot()
         {
-            ScreenShotViewModel = new ScreenShotViewModel(this);
             InitializeComponent();
+            ScreenShotViewModel = new ScreenShotViewModel(this);
             DataContext = ScreenShotViewModel;
             
             

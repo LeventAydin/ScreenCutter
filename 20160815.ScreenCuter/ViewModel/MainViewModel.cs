@@ -22,26 +22,39 @@ namespace _20160815.ScreenCuter
 
         #region Members
 
-        private ICommand buttonsCommand;
         public MainWindow MainWindow { get; set; }
+        private ICommand buttonsClick;
 
         #endregion
+
         #region Properties
 
-        public ICommand ButtonsCommand
+        public ICommand ButtonsClick
         {
             get
             {
-                buttonsCommand = new RelayCommand<string>(ButtonCommand);
-                return buttonsCommand;
+                buttonsClick = new RelayCommand<string>(ButtonsCommand);
+                return buttonsClick;
             }
         }
+
+        
+
+        private void ScreenShotViewModel_ScreenShotEvent(object sender, EventArgs e)
+        {
+            
+            //byte[] img = (byte[])sender;
+            //MainWindow.richTextBox.Document.Blocks.Add(ScreenToChat(img, "Levent"));
+            //MainWindow.richTextBox.ScrollToEnd();
+        }
+
+
 
         #endregion
 
         #region Methods
 
-        private void ButtonCommand(string obj)
+        private void ButtonsCommand(string obj)
         {
             switch (obj)
             {
@@ -52,23 +65,23 @@ namespace _20160815.ScreenCuter
                     win.ScreenShotViewModel.ScreenShotEvent += ScreenShotViewModel_ScreenShotEvent;
 
                     win.ShowDialog();
-
                     break;
 
                 case "Show":
+
+                    string windir = Environment.GetEnvironmentVariable("WINDIR");
+                    System.Diagnostics.Process prc = new System.Diagnostics.Process();
+                    prc.StartInfo.FileName = windir + @"\explorer.exe";
+                    prc.StartInfo.Arguments = @"C:\Users\Public\Documents\Screen Cutter\";
+                    prc.Start();
+
                     break;
 
-                case "Exit":
+                default:
                     break;
-
-                default:break;
             }
         }
 
-        private void ScreenShotViewModel_ScreenShotEvent(object sender, EventArgs e)
-        {
-            
-        }
 
         #endregion
 

@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace _20160815.ScreenCuter
@@ -28,26 +30,27 @@ namespace _20160815.ScreenCuter
 
         public ScreenShotViewModel(ScreenShot screenShot)
         {
+            MainWindow m = new MainWindow();
+
             ScreenShot = screenShot;
             ScreenShot.KeyDown += (sender, e) =>
             {
                 if (e.Key == Key.Escape)
                 {
                     ScreenShot.Close();
-                    MainWindow..Visibility = Visibility.Visible;
+                    
+                    m.MainViewModel.MainWindow.Visibility = Visibility.Visible;
                 }
             };
             ScreenShot.MouseRightButtonUp += (sender, e) =>
             {
                 ScreenShot.Close();
-                MainWindow.MainViewModel.MainWindow.Visibility = Visibility.Visible;
+                m.MainViewModel.MainWindow.Visibility = Visibility.Visible;
             };
-            Screen(ScreenShot, ScreenShot.canvas);
-
+            Screen(ScreenShot, ScreenShot.canvas, m.MainViewModel.MainWindow);
         }
-
-
-
+        
+            
         #endregion
 
         #region Members
@@ -196,20 +199,9 @@ namespace _20160815.ScreenCuter
             tmpGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             tmpGraphics.CopyFromScreen(ix, iy, 0, 0, new System.Drawing.Size(iwidth - 13, iheight - 13), CopyPixelOperation.SourceCopy);
 
-            byte[] data;
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(ImageHelper.CreateBitmapSourceFromBitmap(image)));
-            using (MemoryStream ms = new MemoryStream())
-            {
-                encoder.Save(ms);
-                data = ms.ToArray();
-            }
-
-            if (ScreenShotEvent != null)
-            {
-                ScreenShotEvent(data, null);
-            }
-
+            Directory.CreateDirectory(@"C:\Users\Public\Documents\Screen Cutter");
+            image.Save(@"C:\Users\Public\Documents\Screen Cutter\" + DateTime.Now.Second+".jpg");
+            
 
             window.Close();
             parentWindow.Visibility = System.Windows.Visibility.Visible;
